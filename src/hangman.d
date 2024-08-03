@@ -9,9 +9,8 @@ import std.algorithm;
 import std.ascii;
 
 
-
 string TEXT_LIST = "../words.txt";  // File that contains the list of texts to guess.
-int INCORRECT_COUNT;                    // Amount of incorrect guesses.
+int INCORRECT_COUNT;                // Amount of incorrect guesses.
 
 
 void main() {
@@ -50,7 +49,7 @@ void main() {
       writeln();
 
       // Proccess user's guess.
-      int validCode = validGuess(text, guess, guesses);
+      int validCode = isValidGuess(text, guess, guesses);
       switch (validCode) {
         case 1:  // Valid guess.
           revealLetter(text, guess, displayText);
@@ -72,8 +71,8 @@ void main() {
       writeln();
       printHuman(INCORRECT_COUNT);
       printGuesses(guesses);
-      
-      gameStatus = gameEnded(text, displayText);
+
+      gameStatus = getGameStatus(text, displayText);
     } while (gameStatus == 0);
 
     // Display game info.
@@ -102,6 +101,12 @@ void main() {
 }
 
 
+/**
+ * Generates the display text.
+ *
+ * @param text - the text to generate display for.
+ * @return char[] - the display text.
+ */
 char[] generateDisplay(string text) {
   char[] displayText = new char[text.length];
 
@@ -128,7 +133,17 @@ char[] generateDisplay(string text) {
 }
 
 
-int validGuess(string text, char letter, char[] guesses) {
+/**
+ * Checks if the guess is valid.
+ * 1 = valid.
+ * Invalids: -2 = duplicate; -1 = non-alphabetical; 0 = incorrect.
+ *
+ * @param text - the text to guess.
+ * @param letter - the letter guessed.
+ * @param guesses - the list of letters already guessed.
+ * @return int - the code indicating valid or invalid type.
+ */
+int isValidGuess(string text, char letter, char[] guesses) {
   // Is not a letter, cannot guess.
   if (!letter.isAlpha) {
     return -1;
@@ -143,10 +158,18 @@ int validGuess(string text, char letter, char[] guesses) {
     return 0;
   }
 
+  // Correct guess.
   return 1;
 }
 
 
+/**
+ * Reveals the letter that was guessed on display text.
+ *
+ * @param text - the text to guess.
+ * @param letter - the letter guessed.
+ * @param displayText - the display text.
+ */
 void revealLetter(string text, char letter, char[] displayText) {
   string lowercaseText = text.toLower();
 
@@ -165,6 +188,11 @@ void revealLetter(string text, char letter, char[] displayText) {
 }
 
 
+/**
+ * Draws a human based on the amount of incorrect guesses.
+ *
+ * @param amount - the amount of incorrect guesses.
+ */
 void printHuman(int amount) {
   // Draw head.
   if (amount >= 1) {
@@ -188,6 +216,12 @@ void printHuman(int amount) {
 }
 
 
+/**
+ * Prints the guesses in a format.
+ * Format: "Guesses: [..., ..., ...]"
+ *
+ * @param guesses - the list of guesses.
+ */
 void printGuesses(char[] guesses) {
   size_t length = guesses.length;
 
@@ -200,6 +234,8 @@ void printGuesses(char[] guesses) {
   // [DEMO] Another example of foreach loop, specifying i's datatype here.
   foreach (int i, char guess; guesses) {
     write(guess);
+
+    // Not last guess, format with comma and space.
     if (i < length - 1) {
       write(", ");
     }
@@ -208,7 +244,15 @@ void printGuesses(char[] guesses) {
 }
 
 
-int gameEnded(string text, char[] displayText) {
+/**
+ * Gets the current game status code.
+ * 0 = on-going; 1 = win; 2 = lose.
+ *
+ * @param text - the text to guess.
+ * @param displayText - the text being displayed.
+ * @return int - the game's status code.
+ */
+int getGameStatus(string text, char[] displayText) {
   // Fully guessed the word/phrase.
   if (text == displayText) {
     return 1;
