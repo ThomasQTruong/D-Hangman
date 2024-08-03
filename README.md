@@ -3,6 +3,8 @@
 
 ## About
 - Console based hangman game but coded with the programming language, D.
+  - Uses words from `./words.txt`.
+    - Can modify file usage in `./src/hangman.d`.
 - Demos some features of D-lang.
   - Marked with [DEMO] tag (CTRL+F to search for them).
 
