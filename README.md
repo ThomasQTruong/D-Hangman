@@ -8,7 +8,13 @@
 - Demos some features of D-lang.
   - Marked with [DEMO] tag (CTRL+F to search for them).
 
+## Requirements
+- Programming Language: [Dlang](https://dlang.org/)
+- Compiler: [gdc](https://gdcproject.org/)
+  - Unix can install with: `sudo apt install gdc`.
+
+
 ## Usage
-### Unix
+#### Unix
 1. Change to build directory: `cd ./build`.
 2. Compile and run the program with `make run`.

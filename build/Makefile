@@ -1,5 +1,5 @@
 # By Thomas Truong
-# Quickly compiles and links every .cpp file in the
+# Quickly compiles and links every .d file in the
 # src folder, and places them into the bin folder.
 
 # Directory paths.
