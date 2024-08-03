@@ -23,3 +23,5 @@
     - ![image](https://github.com/user-attachments/assets/2d88bbf2-b29f-4d10-b44e-2d073267cec2)
 2. Lose + Quit:
     - ![image](https://github.com/user-attachments/assets/8bdf70c9-78e4-46cd-99cd-9201b067931d)
+3. Invalid Responses Handling:
+    - ![image](https://github.com/user-attachments/assets/a35ca03c-4295-47f5-aaf4-c63c792e87be)
